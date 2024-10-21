@@ -17,10 +17,9 @@ class BankAccount {
 
   void withdraw(double amount) {
     if (balance - amount < 0) {
-      throw Exception(' $accountOwner Account \$${amount} is Insufficient balance for withdrawal! ');
-     }//else{
-    //   throw Exception(' $accountOwner Account \$${amount}');
-    // }
+      throw Exception(
+          ' $accountOwner Account \$${amount} is Insufficient balance for withdrawal! ');
+    }
   }
 }
 
@@ -33,7 +32,8 @@ class Bank {
   BankAccount createAccount(int accountId, String accountOwner) {
     for (var account in accounts) {
       if (account.accountId == accountId) {
-        throw Exception('Account name: $accountOwner ID: $accountId already exists!!');
+        throw Exception(
+            'Account my name: $accountOwner ID: $accountId already exists!!');
       }
     }
 
@@ -46,12 +46,13 @@ class Bank {
 void main() {
   Bank myBank = Bank(name: "ACELEDA Bank");
   BankAccount myAccount = myBank.createAccount(001, 'Dalin');
-  print("Account ID : ${myAccount.accountId} \nName: ${myAccount.accountOwner}");
-  print("Balance: \$${myAccount.balance}"); 
+  print(
+      "Account ID : ${myAccount.accountId} \nName: ${myAccount.accountOwner}");
+  print("Balance: \$${myAccount.balance}");
   myAccount.credit(100);
-  print("Credit: \$${myAccount.balance}"); 
+  print("Credit: \$${myAccount.balance}");
   myAccount.withdraw(50);
-  print("Balance: \$${myAccount.balance}"); 
+  print("Balance: \$${myAccount.balance}");
 
   try {
     myAccount.withdraw(1000); // This will throw an exception
