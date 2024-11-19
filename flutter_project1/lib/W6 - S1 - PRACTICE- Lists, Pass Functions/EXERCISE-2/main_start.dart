@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:w3_s2_practice/W6 - S1 - PRACTICE- Lists, Pass Functions/EXERCISE-2/model/profile_tile_model.dart';
+import 'package:w3_s2_practice/W6 - S1 - PRACTICE- Lists, Pass Functions/EXERCISE-2/data/profile_data.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -32,7 +34,7 @@ class ProfileApp extends StatelessWidget {
             CircleAvatar(
               radius: 60,
               backgroundImage: AssetImage(
-                  'assets/w5-s2/aang.png'), 
+                  'assets/w4-s2/girl.png'), 
             ),
             SizedBox(height: 20),
             Text(
