@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:w3_s2_practice/W6 - S1 - PRACTICE- Lists, Pass Functions/EXERCISE-2/model/profile_tile_model.dart';
-import 'package:w3_s2_practice/W6 - S1 - PRACTICE- Lists, Pass Functions/EXERCISE-2/data/profile_data.dart';
+import 'model/profile_tile_model.dart';
+import 'data/profile_data.dart';
 
 void main() {
-  runApp(const MaterialApp(
+  runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: ProfileApp(),
+    home: ProfileApp(profileData: profileData),
   ));
 }
 
 const Color mainColor = Color(0xff5E9FCD);
 
 class ProfileApp extends StatelessWidget {
-  const ProfileApp({super.key});
+  const ProfileApp({super.key, required this.profileData});
+  final ProfileData profileData;
 
   @override
   Widget build(BuildContext context) {
@@ -26,43 +27,54 @@ class ProfileApp extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: const Center(
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             CircleAvatar(
               radius: 60,
-              backgroundImage: AssetImage(
-                  'assets/w4-s2/girl.png'), 
+              backgroundImage: AssetImage(profileData.avatarUrl),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
-              'Ronan OGOR',
-              style: TextStyle(
+              profileData.name,
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: mainColor,
+                color: Color.fromARGB(255, 81, 179, 249),
               ),
             ),
             Text(
-              'Flutter Developer',
-              style: TextStyle(
+              profileData.position,
+              style: const TextStyle(
                 fontSize: 16,
-                color: Colors.grey,
+                color: Color.fromARGB(255, 0, 0, 0),
               ),
             ),
-            SizedBox(height: 20),
-            ProfileTile(
-              icon: Icons.phone,
-              title: "Phone Number",
-              data: "+123 456 7890",
-            ),
-             ProfileTile(
-              icon: Icons.location_on,
-              title: "Address",
-              data: "Cambodia",
-            ),
+            const SizedBox(height: 20),
+
+            //Loop
+            ListView.builder(
+                shrinkWrap: true,
+                itemCount: profileData.titles.length,
+                itemBuilder: (context, index) {
+                  final tile = profileData.titles[index];
+                  return Card(
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: ListTile(
+                      leading: Icon(tile.icon, color: Colors.red[400]),
+                      title: Text(
+                        tile.title,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red[400]),
+                      ),
+                      subtitle: Text(tile.value),
+                    ),
+                  );
+                })
           ],
         ),
       ),
