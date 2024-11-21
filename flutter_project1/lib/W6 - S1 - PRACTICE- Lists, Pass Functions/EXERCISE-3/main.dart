@@ -35,7 +35,7 @@ class _TemperatureAppState extends State<TemperatureApp> {
               end: Alignment.bottomRight,
             ),
           ),
-          child: currentScreen == 'welcome'? Welcome(onStart: switchScreen) :  Temperature()    
+          child: currentScreen == 'welcome'? Welcome(onPressed: switchScreen) :  Temperature()    
           ),
       ),
     );

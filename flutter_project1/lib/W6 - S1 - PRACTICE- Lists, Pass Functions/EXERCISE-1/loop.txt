@@ -21,3 +21,6 @@ The task requires creating a Flutter app that displays a ListView with a list of
 A direct loop within the widget list.
 The map() method.
 A dedicated function.
+
+... spread list of list.
+list of widget

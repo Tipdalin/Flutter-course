@@ -40,11 +40,11 @@ class FavoriteJokesList extends StatefulWidget {
 }
 
 class _FavoriteJokesListState extends State<FavoriteJokesList> {
-  String? _favoriteJokeId; // ID of the current favorite joke
+  bool? _favoriteJokeId; // ID of the current favorite joke
 
   void setFavorite(String jokeId) {
     setState(() {
-      _favoriteJokeId = jokeId;
+      _favoriteJokeId = true;
     });
   }
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Welcome extends StatelessWidget {
-  const Welcome({super.key, required this.onStart});
-  final VoidCallback onStart;
+  const Welcome({super.key, required this.onPressed});
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class Welcome extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         OutlinedButton(
-          onPressed: onStart,
+          onPressed: onPressed,
           style: OutlinedButton.styleFrom(
               side: const BorderSide(width: 1.0, color: Colors.white)),
           child: const Text('Start to convert',
