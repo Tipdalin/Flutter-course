@@ -19,18 +19,32 @@ class QuestionScreen extends StatelessWidget {
   ) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [Text(
+      children: [
+        Text(
         question[questionIndex].title,
-        style: const TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
+        style: const TextStyle(
+          color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
       ),
       const SizedBox(height: 30),
       Column(children: [
-       
-          
-        
-      ],)
+        ...question[questionIndex].possibleAnswers.map((answer) => SizedBox(
+          width: 200,
+          child:  Padding(padding: const EdgeInsets.all(20),
+          child: ElevatedButton(onPressed: () => onTap(answer), 
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+          ),
+        child: Text(
+          answer,
+          style: const TextStyle(
+            color: Colors.blue
+        )),
+        ),
+        )),
+        )
+      ]),
       ],
-      
-    );
+      );
+    
   }
 }

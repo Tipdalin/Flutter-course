@@ -25,28 +25,33 @@ class _QuizAppState extends State<QuizApp> {
   void startQuiz() {
     setState(() {
       quizState = QuizState.started;
+
       //store user's answer
       submission = Submission();
     });
   }
 
   void onTap(String select) {
-    setState(() {
-      submission!.answers.add(Answer(
-          question: widget.quiz.questions[currentIndex],
-          questionAnswer: select));
-      if (currentIndex < widget.quiz.questions.length - 1) {
+    submission!.answers.add(Answer(
+        question: widget.quiz.questions[currentIndex], questionAnswer: select));
+
+    if (currentIndex < widget.quiz.questions.length - 1) {
+      setState(() {
         currentIndex += 1;
-      } else {
+      });
+    } else {
+      setState(() {
         quizState = QuizState.finished;
-      }
-    });
+      });
+    }
   }
+
   void restart() {
+    currentIndex = 0;
+    submission!.answers.clear();
+
     setState(() {
-      quizState = QuizState.started;
-      currentIndex = 0;
-      submission!.answers.clear();
+      quizState = QuizState.notStarted;
     });
   }
 
@@ -58,22 +63,26 @@ class _QuizAppState extends State<QuizApp> {
         body: Center(
           child: Builder(builder: (BuildContext context) {
             switch (quizState) {
+
               case QuizState.notStarted:
                 return WelcomeScreen(
                   startQuiz: startQuiz,
                   quizTitle: widget.quiz.title,
                 );
+
               case QuizState.started:
                 return QuestionScreen(
-                  question: widget.quiz.questions,   
-                  onTap: onTap, 
-                  questionIndex: currentIndex, 
-                  questions: widget.quiz.questions
-                );
+                    question: widget.quiz.questions,
+                    onTap: onTap,
+                    questionIndex: currentIndex,
+                    questions: widget.quiz.questions
+                    );
+                    
               case QuizState.finished:
                 return ResultScreen(
                   quiz: widget.quiz,
                   submission: submission!,
+                  restart: restart,
                 );
             }
           }),
