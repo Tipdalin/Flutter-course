@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -24,7 +23,7 @@ class _DeviceConverterState extends State<DeviceConverter> {
       selectedCurrency = currency;
     });
 
-    convert(input: inputValue);
+    
   }
 
   String converted = '';
@@ -50,7 +49,7 @@ class _DeviceConverterState extends State<DeviceConverter> {
         break;
     }
     setState(() 
-      => converted = value.toString());
+      => converted = value as String);
   }
 
   final BoxDecoration textDecoration = BoxDecoration(
