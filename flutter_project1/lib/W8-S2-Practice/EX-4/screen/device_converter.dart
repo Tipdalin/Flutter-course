@@ -23,7 +23,7 @@ class _DeviceConverterState extends State<DeviceConverter> {
       selectedCurrency = currency;
     });
 
-    
+    convert(input: inputValue);
   }
 
   String converted = '';
@@ -42,14 +42,13 @@ class _DeviceConverterState extends State<DeviceConverter> {
         value = value;
         break;
       case Currency.riel:
-        value = value * 4000;
+        value = value * 4100;
         break;
       case Currency.dong:
         value = value * 25400;
         break;
     }
-    setState(() 
-      => converted = value as String);
+    setState(() => converted = value.toString());
   }
 
   final BoxDecoration textDecoration = BoxDecoration(
@@ -72,7 +71,7 @@ class _DeviceConverterState extends State<DeviceConverter> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const Icon(
-            Icons.money,
+            Icons.local_convenience_store_rounded,
             size: 60,
             color: Colors.white,
           ),
@@ -86,36 +85,36 @@ class _DeviceConverterState extends State<DeviceConverter> {
           const Text("Amount in dollars:",
               style: TextStyle(color: Colors.white)),
           const SizedBox(height: 10),
-          TextField( 
+          TextField(
             keyboardType: TextInputType.number,
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.digitsOnly,
             ],
-              decoration: InputDecoration(
-                  prefix: const Text('\$ '),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide:
-                        const BorderSide(color: Colors.white, width: 1.0),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  hintText: ('Enter an amount in dollar'),
-                  hintStyle: const TextStyle(color: Colors.white)),
-              style: const TextStyle(color: Colors.white),
-              onChanged: (value) => convert(input: value),
-              ),
+            decoration: InputDecoration(
+                prefix: const Text('\$ '),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.white, width: 1.0),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                hintText: ('Enter an amount in dollar'),
+                hintStyle: const TextStyle(color: Colors.white)),
+            style: const TextStyle(color: Colors.white),
+            onChanged: (value) => convert(input: value),
+          ),
           const SizedBox(height: 30),
-
           DropdownButton(
               value: selectedCurrency,
               items: Currency.values.map((Currency currency) {
                 return DropdownMenuItem<Currency>(
                   value: currency,
-                  child:
-                      Text(currency.toString().split(".").last.toUpperCase(), style: const TextStyle( backgroundColor:  Color.fromARGB(255, 148, 17, 224),color: Color.fromARGB(255, 255, 255, 255), fontWeight: FontWeight.bold)),
+                  child: Text(currency.toString().split(".").last.toUpperCase(),
+                      style: const TextStyle(
+                          backgroundColor: Color.fromARGB(255, 148, 17, 224),
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          fontWeight: FontWeight.bold)),
                 );
               }).toList(),
               onChanged: selectCurrency),
-          
           const SizedBox(height: 30),
           const Text("Amount in selected device:",
               style: TextStyle(color: Colors.white)),
@@ -123,7 +122,7 @@ class _DeviceConverterState extends State<DeviceConverter> {
           Container(
               padding: const EdgeInsets.all(10),
               decoration: textDecoration,
-              child:  Text(converted.isEmpty ? '' : converted))
+              child: Text(converted.isEmpty ? '' : converted))
         ],
       )),
     );

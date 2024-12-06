@@ -95,7 +95,7 @@ class _ExpenseFormState extends State<ExpenseForm> {
       Expense expense = Expense(
           title: title,
           amount: amount,
-          date: DateTime.now(),
+          date: selectedDatetime ??  DateTime.now(),
           category: selectedCategory ?? Category.leisure);
 
       // 3.2- Ask the parent to add the expense
